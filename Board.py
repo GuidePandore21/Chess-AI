@@ -15,3 +15,16 @@ class Board:
             ValueError: If file_index or rank_index are out of bounds (0-7).
         """
         return rank_index << 4 | file_index
+    
+    def index_to_coords(self, board_index):
+        """Converts a board index to file and rank indices.
+        Args:
+            board_index (int): The board index (0-127).
+        Returns:
+            str: The coordinates in the format "file_rank" (e.g., "a1", "h8").
+        Raises:
+            ValueError: If board_index is out of bounds (0-127).
+        """
+        file_index = board_index & 0x0F
+        rank_index = board_index >> 4
+        return f"{self.FILES[file_index]}{self.RANKS[rank_index]}" 
