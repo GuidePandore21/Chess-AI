@@ -3,6 +3,8 @@ class Board:
         self.board = [0] * 128
         self.FILES = "abcdefgh"
         self.RANKS = "12345678"
+        P, N, B, R, Q, K = 1, 2, 3, 4, 5, 6
+        WHITE, BLACK = 1, -1
     
     def coords_to_index(self, file_index, rank_index):
         """Converts file and rank indices to a board index.
@@ -32,3 +34,15 @@ class Board:
         file_index = board_index & 0x0F
         rank_index = board_index >> 4
         return f"{self.FILES[file_index]}{self.RANKS[rank_index]}"
+
+    def set_piece(self, index, piece):
+        """Sets a piece at the specified board index.
+        Args:
+            index (int): The board index (0-127).
+            piece (int): The piece to place on the board.
+        Raises:
+            ValueError: If index is out of bounds (0-127).
+        """
+        if not 0 <= index < 128:
+            raise ValueError("Index out of bounds")
+        self.board[index] = piece
