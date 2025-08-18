@@ -14,6 +14,8 @@ class Board:
         Raises:
             ValueError: If file_index or rank_index are out of bounds (0-7).
         """
+        if not (0 <= file_index < 8) or not (0 <= rank_index < 8):
+            raise ValueError("File and rank indices must be between 0 and 7")
         return rank_index << 4 | file_index
     
     def index_to_coords(self, board_index):
@@ -25,6 +27,8 @@ class Board:
         Raises:
             ValueError: If board_index is out of bounds (0-127).
         """
+        if not 0 <= board_index < 128:
+            raise ValueError("Index out of bounds")
         file_index = board_index & 0x0F
         rank_index = board_index >> 4
-        return f"{self.FILES[file_index]}{self.RANKS[rank_index]}" 
+        return f"{self.FILES[file_index]}{self.RANKS[rank_index]}"
