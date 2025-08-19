@@ -78,3 +78,18 @@ class Board:
             rows.append(f"{rank + 1} " + " ".join(line))
         print("\n".join(rows))
         print("  a b c d e f g h")
+    
+    # -------------------- Moves --------------------
+    
+    def get_piece_at(self, file_index : int, rank_index : int) -> int:
+        """Gets the piece at the specified file and rank indices.
+        Args:
+            file_index (int): Index of the file (0-7).
+            rank_index (int): Index of the rank (0-7).
+        Returns:
+            int: The piece at the specified position, or 0 if empty.
+        Raises:
+            ValueError: If file_index or rank_index are out of bounds (0-7).
+        """
+        index = self.coords_to_index(file_index, rank_index)
+        return self.board[index]
