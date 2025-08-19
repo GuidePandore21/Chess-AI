@@ -57,3 +57,24 @@ class Board:
             self.set_piece(self.coords_to_index(f, 1), self.P * self.WHITE)
             self.set_piece(self.coords_to_index(f, 6), self.P * self.BLACK)
             self.set_piece(self.coords_to_index(f, 7), back[f] * self.BLACK)
+    
+    def display_board(self) -> None:
+        """Displays the current state of the board in a human-readable format.
+        This method prints the board with ranks and files labeled, showing pieces
+        in their respective positions. White pieces are uppercase, black pieces are lowercase.
+        """
+        rows = []
+        for rank in reversed(range(8)):
+            line = []
+            for file in range(8):
+                piece = self.board[self.coords_to_index(file, rank)]
+                character_to_display = "."
+                if piece != 0:
+                    t = abs(piece)
+                    character_to_display = {self.P:"P", self.N:"N", self.B:"B", self.R:"R", self.Q:"Q", self.K:"K"}[t]
+                    if piece < 0:
+                        character_to_display = character_to_display.lower()
+                line.append(character_to_display)
+            rows.append(f"{rank + 1} " + " ".join(line))
+        print("\n".join(rows))
+        print("  a b c d e f g h")
