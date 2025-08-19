@@ -93,3 +93,17 @@ class Board:
         """
         index = self.coords_to_index(file_index, rank_index)
         return self.board[index]
+    
+    def get_piece_at_index(self, index : int) -> int:
+        """Gets the piece at the specified board index.
+        Args:
+            index (int): The board index (0-127).
+        Returns:
+            int: The piece at the specified index, or 0 if empty.
+        Raises:
+            ValueError: If index is out of bounds (0-127).
+        """
+        if not 0 <= index < 128:
+            raise ValueError("Index out of bounds")
+        return self.board[index]
+    
