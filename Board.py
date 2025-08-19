@@ -6,7 +6,7 @@ class Board:
         self.P, self.N, self.B, self.R, self.Q, self.K = 1, 2, 3, 4, 5, 6
         self.WHITE, self.BLACK = 1, -1
     
-    def coords_to_index(self, file_index, rank_index):
+    def coords_to_index(self, file_index : int, rank_index : int) -> int:
         """Converts file and rank indices to a board index.
         Args:
             file_index (int): Index of the file (0-7).
@@ -20,7 +20,7 @@ class Board:
             raise ValueError("File and rank indices must be between 0 and 7")
         return rank_index << 4 | file_index
     
-    def index_to_coords(self, board_index):
+    def index_to_coords(self, board_index : int) -> str:
         """Converts a board index to file and rank indices.
         Args:
             board_index (int): The board index (0-127).
@@ -35,7 +35,7 @@ class Board:
         rank_index = board_index >> 4
         return f"{self.FILES[file_index]}{self.RANKS[rank_index]}"
 
-    def set_piece(self, index, piece):
+    def set_piece(self, index : int, piece : int) -> None:
         """Sets a piece at the specified board index.
         Args:
             index (int): The board index (0-127).
@@ -47,7 +47,7 @@ class Board:
             raise ValueError("Index out of bounds")
         self.board[index] = piece
     
-    def set_start_position_pieces(self):
+    def set_start_position_pieces(self) -> None:
         """Sets the starting position of pieces on the board.
         This method initializes the board with the standard chess starting position.
         """
