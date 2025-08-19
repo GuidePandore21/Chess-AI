@@ -3,8 +3,8 @@ class Board:
         self.board = [0] * 128
         self.FILES = "abcdefgh"
         self.RANKS = "12345678"
-        P, N, B, R, Q, K = 1, 2, 3, 4, 5, 6
-        WHITE, BLACK = 1, -1
+        self.P, self.N, self.B, self.R, self.Q, self.K = 1, 2, 3, 4, 5, 6
+        self.WHITE, self.BLACK = 1, -1
     
     def coords_to_index(self, file_index, rank_index):
         """Converts file and rank indices to a board index.
@@ -46,3 +46,14 @@ class Board:
         if not 0 <= index < 128:
             raise ValueError("Index out of bounds")
         self.board[index] = piece
+    
+    def set_start_position_pieces(self):
+        """Sets the starting position of pieces on the board.
+        This method initializes the board with the standard chess starting position.
+        """
+        back = [self.R, self.N, self.B, self.Q, self.K, self.B, self.N, self.R]
+        for f in range(8):
+            self.set_piece(self.coords_to_index(f, 0), back[f] * self.WHITE)
+            self.set_piece(self.coords_to_index(f, 1), self.P * self.WHITE)
+            self.set_piece(self.coords_to_index(f, 6), self.P * self.BLACK)
+            self.set_piece(self.coords_to_index(f, 7), back[f] * self.BLACK)
